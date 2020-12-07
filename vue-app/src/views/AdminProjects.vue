@@ -1,7 +1,9 @@
 <template>
 <div class="home col-8 mx-auto py-5 mt-5">
-  <h2>Trouve ton partenaire professionel !</h2>
-  <router-link to="/AddProject"><button>Add New</button></router-link>
+  <h2>Projets</h2>
+    <router-link to="/Admin/Challenges" ><button>Challenges</button></router-link>
+    <router-link to="/Admin/projects"><button style="background-color:red; color:yellow">Projets</button></router-link>
+    <router-link to="/Admin/users"><button>Users</button></router-link>
   <div class="card" v-for="project in AllProjects" :key="project.id">
     <div class="row">
       <div class="col">
@@ -18,11 +20,11 @@
       </div>
       <div class="col">
         <p>
-          <button v-if="user.id == project.user_id" @click="DeleteProject(project.id)" 
+          <button @click="DeleteProject(project.id)" 
             style="float:right;background-color:red; color:yellow">trash
           </button>
           <router-link :to="{ name: 'EditProject', params: {id: project.id}}">
-            <button  v-if="user.id == project.user_id" style="float:right;background-color:red; color:yellow">edit</button>
+            <button style="float:right;background-color:red; color:yellow">edit</button>
           </router-link>
         </p>
       </div>
@@ -30,7 +32,7 @@
     <h4>Description</h4>
     <p>{{project.description}}</p>
   </div>
-  <router-link to="/AddProject"><button>Add New</button></router-link>
+  <router-link to="/Admin/AddProject"><button>Add New</button></router-link>
 </div>
 </template>
 
@@ -40,11 +42,10 @@ import Projects from "../apis/Projects";
 import { mapState } from "vuex";
 
 export default {
-  name: "Partner",
+  name: "AdminProjects",
   computed: {
     ...mapState({
-      AllProjects: state => state.projects,
-      user: state => state.auth.user
+      AllProjects: state => state.projects
     })
   },
 methods: {

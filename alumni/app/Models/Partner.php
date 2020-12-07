@@ -18,7 +18,8 @@ class Partner extends Model
         'titre',
         'description',
         'langage',
-        'pseudo'  
+        'pseudo',
+        'user_id'
     ];
 
 

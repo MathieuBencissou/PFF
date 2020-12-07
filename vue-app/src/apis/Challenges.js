@@ -10,6 +10,9 @@ export default {
   DeleteChallenge(id) {
     return Api().delete(`/challenges/${id}`);
   },
+  AddPlayer(id) {
+    return Api().put(`/challenges/addplayer/${id}`);
+  },
   EditChallenge(challenge){
     return Api().put(`/challenges/${challenge.id}`, challenge);
   }

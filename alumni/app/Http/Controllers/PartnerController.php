@@ -14,6 +14,7 @@ class PartnerController extends Controller
             'description' => ['required'],
             'langage' => ['required'],
             'pseudo' => ['required'],
+            'user_id' => ['required'],
         ]);
 
     Partner::create([
@@ -21,6 +22,7 @@ class PartnerController extends Controller
         'description' => $request->description,
         'langage' => $request->langage,
         'pseudo' => $request->pseudo,
+        'user_id' => $request->user_id,
     ]);
     }
 

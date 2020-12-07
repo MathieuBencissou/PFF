@@ -18,7 +18,8 @@ class CreatePartnersTable extends Migration
             $table->string('titre', 255);
             $table->string('description', 500)->nullable();
             $table->string('langage', 255)->nullable();
-            $table->string('pseudo', 255)->nullable();   
+            $table->string('pseudo', 255)->nullable();
+            $table->integer('user_id')->nullable(); 
             $table->timestamps();
         });
     }

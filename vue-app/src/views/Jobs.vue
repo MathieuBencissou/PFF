@@ -1,32 +1,33 @@
 <template>
-<div>
- <pe-offres-emploi></pe-offres-emploi>
-</div>
+
+          <img src="../assets/emploipole.png">
+ <!-- <pe-offres-emploi></pe-offres-emploi> -->
+
 </template>
 
 
 
 <script>
 
-    import Jobs from "../apis/Jobs";
+    // import Jobs from "../apis/Jobs";
 
 
-    export default {
+export default {
   name: "Jobs",
-      mounted() {
+  //   mounted() {
 
-        var macarte = document.querySelector('pe-offres-emploi');
-            macarte.options = {
-                rechercheAuto: false,
-                zoomInitial: 5,
-                positionInitiale: [2.09, 46.505],
-                technicalParameters: {
-                  range: { value: '0-49', show: false, order: 1},
-                  sort: { value: 1, show: true, order: 3}
-                }
-            };
-        macarte.token = "i6ZIvn6TbYICNo0_L8vW7yN_INc";
-    }
+  //     var macarte = document.querySelector('pe-offres-emploi');
+  //         macarte.options = {
+  //             rechercheAuto: false,
+  //             zoomInitial: 5,
+  //             positionInitiale: [2.09, 46.505],
+  //             technicalParameters: {
+  //               range: { value: '0-49', show: false, order: 1},
+  //               sort: { value: 1, show: true, order: 3}
+  //             }
+  //         };
+  //     macarte.token = "i6ZIvn6TbYICNo0_L8vW7yN_INc";
+  // }
 };
 
 

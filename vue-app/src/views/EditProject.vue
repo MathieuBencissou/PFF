@@ -4,7 +4,7 @@
     <div class="card">
       <div id="info" class="card-body">
         <div class="form-group">
-          <label for="titre">Titre:</label>
+          <label for="titre">Titre</label>
           <input
             type="text"
             v-model="project.titre"
@@ -16,19 +16,20 @@
           </span>
         </div>
         <div class="form-group">
-          <label for="details">Description:</label>
-          <input
+          <label for="details">Description</label>
+          <textarea
             type="text"
             v-model="project.description"
+            rows="5"
             class="form-control"
-          
-          />
+            id="details">
+          </textarea>
           <span class="text-danger" v-if="errors.description">
             {{ errors.description[0] }}
           </span>
         </div>
         <div class="form-group">
-          <label for="user_id">Langage:</label>
+          <label for="user_id">Technos</label>
           <input
             type="text"
             v-model="project.langage"
@@ -40,7 +41,7 @@
           </span>
         </div>
                 <div class="form-group">
-          <label for="pseudo">Pseudo:</label>
+          <label for="pseudo">Créateur du projet</label>
           <input
             type="text"
             v-model="project.pseudo"

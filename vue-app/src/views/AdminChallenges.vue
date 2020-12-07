@@ -1,6 +1,10 @@
 <template>
   <div class="home col-8 mx-auto py-5 mt-5">
-    <h2>Participez jusqu'à trois challenges!</h2>
+    <h2>Challenges</h2>
+    <router-link to="/Admin/Challenges" ><button style="background-color:red; color:yellow">Challenges</button></router-link>
+    <router-link to="/Admin/projects"><button>Projets</button></router-link>
+    <router-link to="/Admin/users"><button>Users</button></router-link>
+
     <div class="card" v-for="challenge in AllChallenges" :key="challenge.id">
     <!-- <div class="card-body" v-if="user">
         <h4>Hello, {{ user.name }}</h4>
@@ -27,21 +31,15 @@
         <div class="col">
           <h4>Nombre d'inscrits</h4>
           <p>{{challenge.nb_inscrits}}
-            <button v-if="((((user.challenge1_id==(-1))||
-                            (user.challenge2_id==(-1))||
-                            (user.challenge3_id==(-1)))
-                      &&((user.challenge1_id!=(challenge.id))&&
-                        (user.challenge2_id!=(challenge.id))&&
-                        (user.challenge3_id!=(challenge.id)))))
-                      &&(user.id!=challenge.user_id)" @click="Addplayer(challenge.id); EditPlayer(challenge.id)" 
+            <button @click="Addplayer(challenge.id)" 
             style="float:right;background-color:red; color:yellow">
-            Participer
+            +1 inscrit
             </button>
-            <button v-if="user.id == challenge.user_id" @click="DeleteChallenge(challenge.id)" 
+            <button  @click="DeleteChallenge(challenge.id)" 
               style="float:right;background-color:red; color:yellow">trash
             </button>
             <router-link :to="{ name: 'EditChallenge', params: {id: challenge.id}}">
-              <button v-if="user.id == challenge.user_id" style="float:right;background-color:red; color:yellow">edit</button>
+              <button  style="float:right;background-color:red; color:yellow">edit</button>
             </router-link>
           </p>
         </div>
@@ -54,7 +52,7 @@
       <!-- <h4>Plus que</h4>
       <p>{{dayDiff(datenow(),challenge.date_limit)}}</p> -->
     </div>
-    <router-link to="/AddChallenge"><button>Add New</button></router-link>
+    <router-link to="/Admin/AddChallenge"><button>Add New</button></router-link>
   </div>
   
           <!-- <router-link :to="{ name: 'EditChallenge', params: {id: challenge.id}}">Show</router-link>
@@ -67,7 +65,7 @@ import Challenges from "../apis/Challenges";
 import { mapState } from "vuex";
 
 export default {
-  name: "Challenges",
+  name: "AdminChallenges",
   computed: {
     ...mapState ({
       AllChallenges: state => state.challenges,
@@ -145,3 +143,4 @@ export default {
   }
 };
 </script>
+

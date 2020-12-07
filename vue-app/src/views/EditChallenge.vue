@@ -4,7 +4,7 @@
     <div class="card">
       <div id="info" class="card-body">
         <div class="form-group">
-          <label for="Titre">Titre:</label>
+          <label for="Titre">Titre</label>
           <input
             type="text"
             v-model="challenge.titre"
@@ -16,19 +16,20 @@
           </span>
         </div>
         <div class="form-group">
-          <label for="details">Détails:</label>
-          <input
+          <label for="details">Détails</label>
+          <textarea
             type="text"
             v-model="challenge.details"
+            rows="5"
             class="form-control"
-          
-          />
+            id="details">
+          </textarea>
           <span class="text-danger" v-if="errors.details">
             {{ errors.details[0] }}
           </span>
         </div>
         <div class="form-group">
-          <label for="user_id">date limite</label>
+          <label for="user_id">Date limite</label>
           <input
             type="date"
             v-model="challenge.date_limite"
@@ -40,7 +41,7 @@
           </span>
         </div>
         <div class="form-group">
-          <label for="technos">technos</label>
+          <label for="technos">Technos</label>
           <input
             type="text"
             v-model="challenge.technos"

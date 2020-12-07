@@ -1,27 +1,27 @@
 <template>
   <div class="home col-5 mx-auto py-5 mt-5">
-    <h1 class="text-center">Création d'un nouveau challenge</h1>
+    <h1 class="text-center">Modifiez votre challenge</h1>
     <div class="card">
-      <div class="card-body">
+      <div id="info" class="card-body">
         <div class="form-group">
-          <label for="titre">Titre</label>
+          <label for="Titre">Titre</label>
           <input
             type="text"
-            v-model="form.titre"
+            v-model="challenge.titre"
             class="form-control"
-            id="titre"
+            
           />
           <span class="text-danger" v-if="errors.titre">
             {{ errors.titre[0] }}
           </span>
         </div>
         <div class="form-group">
-          <label for="details">Description</label>
+          <label for="details">Détails</label>
           <textarea
             type="text"
-            v-model="form.details"
-            class="form-control"
+            v-model="challenge.details"
             rows="5"
+            class="form-control"
             id="details">
           </textarea>
           <span class="text-danger" v-if="errors.details">
@@ -29,76 +29,69 @@
           </span>
         </div>
         <div class="form-group">
-          <label for="date_limite">Date limite</label>
+          <label for="user_id">Date limite</label>
           <input
             type="date"
-            v-model="form.date_limite"
+            v-model="challenge.date_limite"
             class="form-control"
             id="date_limite"
           />
           <span class="text-danger" v-if="errors.date_limite">
-            {{ errors.date_limite[0] }}
+            {{ errors.user_id[0] }}
           </span>
         </div>
         <div class="form-group">
           <label for="technos">Technos</label>
           <input
             type="text"
-            v-model="form.technos"
+            v-model="challenge.technos"
             class="form-control"
             id="technos"
           />
           <span class="text-danger" v-if="errors.technos">
-            {{ errors.technos[0] }}
+            {{ errors.user_id[0] }}
           </span>
         </div>
         <button
           type="submit"
-          @click.prevent="AddChallenge"
+          @click.prevent="EditChallenge()"
           class="btn btn-primary btn-block"
         >
-          Créez votre challenge!
+          Confirmation
         </button>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import Challenges from "../apis/Challenges";
-import { mapState } from "vuex";
+import { mapState } from 'vuex';
 
 export default {
-  name:'AddChallenge',
+  name: "AdminEditChallenge",
   data() {
     return {
       form: {
         titre: "",
         details: "",
-        contact: "",
-        date_limite: "",
-        user_id: "",
+        introduction: "",
         nb_inscrits: "",
-        technos: ""
+        user_id:""
       },
       errors: []
-    };
+    }
   },
   computed: {
-    ...mapState({
-      AllChallenges: state => state.challenges,
-      user: state => state.auth.user
-      //je définie Allchallenges comme l'état actuel avec tous les challenges
-    })
+    ...mapState(['challenges']),
+    challenge() {
+      return this.challenges.find(chal => chal.id == this.$route.params.id);
+    }
   },
   methods: {
-    //quand on clique sur le boutton @click-prevent la fonction ci-dessous
-    AddChallenge() {
-      this.form.user_id = this.user.id;
-      this.form.contact = this.user.email;
-      Challenges.AddChallenge(this.form)
+    EditChallenge() {
+      Challenges.EditChallenge(this.challenge)
         .then(() => {
-          this.$router.push({ name: "Challenges" });
+          this.$router.push({ name: "AdminChallenges" });
         })
         .catch(error => {
           if (error.response.status === 422) {

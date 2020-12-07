@@ -49,4 +49,10 @@ class ChallengesController extends Controller
         $Chal->user_id = $request->user_id;
         $Chal->save();
     }
+    public function AddPlayer(Request $request, $id)
+    {
+        $Chal= Challenges::findOrFail($id);
+        $Chal->nb_inscrits = ($Chal->nb_inscrits)+1;
+        $Chal->save();
+    }
 }

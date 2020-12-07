@@ -10,7 +10,8 @@ export default new Vuex.Store({
       user: [],
     },
     challenges: [],
-    projects : []
+    projects : [],
+    allusers: []
     //base de donnée en local dans notre vue
   },
 
@@ -18,12 +19,11 @@ export default new Vuex.Store({
     isLoggedIn(state) {
       return state.auth.login;
     },
-    getUserId(state) {
-      return state.auth.user.id;
-    }
     //des getters
+    isdmin(state) {
+    return (state.auth.user.dmin==38)
+    }
   },
-
   mutations: {
     //modifier en local les données
     LOGIN(state, status) {
@@ -37,6 +37,10 @@ export default new Vuex.Store({
     CHALLENGES(state, challenges) {
       state.challenges = challenges;
     },
+    ADDPLAYER(state, id) {
+      let i = state.challenges.find(challenge => challenge.id === id)
+      i.nb_inscrits= i.nb_inscrits+1;
+    },
     PROJECTS(state, projects) {
       state.projects = projects;
     },
@@ -45,6 +49,9 @@ export default new Vuex.Store({
     },
     REMOVEPROJECT(state, id) {
       state.projects  = state.projects.filter(project => project.id !== id);
+    },
+    ALLUSERS(state, users) {
+      state.allusers = users;
     }
   },
 

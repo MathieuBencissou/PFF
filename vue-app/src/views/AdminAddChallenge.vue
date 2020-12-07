@@ -69,7 +69,7 @@ import Challenges from "../apis/Challenges";
 import { mapState } from "vuex";
 
 export default {
-  name:'AddChallenge',
+  name:'AdminAddChallenge',
   data() {
     return {
       form: {
@@ -98,7 +98,7 @@ export default {
       this.form.contact = this.user.email;
       Challenges.AddChallenge(this.form)
         .then(() => {
-          this.$router.push({ name: "Challenges" });
+          this.$router.push({ name: "AdminChallenges" });
         })
         .catch(error => {
           if (error.response.status === 422) {

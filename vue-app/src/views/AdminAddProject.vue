@@ -1,6 +1,6 @@
 <template>
   <div class="home col-5 mx-auto py-5 mt-5">
-    <h1 class="text-center">Création d'un nouveau challenge</h1>
+    <h1 class="text-center">Création d'un nouveau projet</h1>
     <div class="card">
       <div class="card-body">
         <div class="form-group">
@@ -16,48 +16,36 @@
           </span>
         </div>
         <div class="form-group">
-          <label for="details">Description</label>
+          <label for="description">Description</label>
           <textarea
             type="text"
-            v-model="form.details"
+            v-model="form.description"
             class="form-control"
             rows="5"
             id="details">
           </textarea>
-          <span class="text-danger" v-if="errors.details">
-            {{ errors.details[0] }}
+          <span class="text-danger" v-if="errors.description">
+            {{ errors.description[0] }}
           </span>
         </div>
         <div class="form-group">
-          <label for="date_limite">Date limite</label>
-          <input
-            type="date"
-            v-model="form.date_limite"
-            class="form-control"
-            id="date_limite"
-          />
-          <span class="text-danger" v-if="errors.date_limite">
-            {{ errors.date_limite[0] }}
-          </span>
-        </div>
-        <div class="form-group">
-          <label for="technos">Technos</label>
+          <label for="langage">Technos</label>
           <input
             type="text"
-            v-model="form.technos"
+            v-model="form.langage"
             class="form-control"
-            id="technos"
+            id="langage"
           />
-          <span class="text-danger" v-if="errors.technos">
-            {{ errors.technos[0] }}
+          <span class="text-danger" v-if="errors.langage">
+            {{ errors.langage[0] }}
           </span>
         </div>
         <button
           type="submit"
-          @click.prevent="AddChallenge"
+          @click.prevent="AddProject"
           class="btn btn-primary btn-block"
         >
-          Créez votre challenge!
+          Add your Project
         </button>
       </div>
     </div>
@@ -65,40 +53,37 @@
 </template>
 
 <script>
-import Challenges from "../apis/Challenges";
+import Projects from "../apis/Projects";
 import { mapState } from "vuex";
 
 export default {
-  name:'AddChallenge',
+  name:'AdminAddProject',
   data() {
     return {
       form: {
         titre: "",
-        details: "",
-        contact: "",
-        date_limite: "",
-        user_id: "",
-        nb_inscrits: "",
-        technos: ""
+        description: "",
+        langage: "",
+        pseudo: "",
+        user_id: ""
       },
       errors: []
     };
   },
   computed: {
     ...mapState({
-      AllChallenges: state => state.challenges,
+      AllProjects: state => state.projects,
       user: state => state.auth.user
       //je définie Allchallenges comme l'état actuel avec tous les challenges
     })
   },
   methods: {
-    //quand on clique sur le boutton @click-prevent la fonction ci-dessous
-    AddChallenge() {
+    AddProject() {
+      this.form.pseudo = this.user.name;
       this.form.user_id = this.user.id;
-      this.form.contact = this.user.email;
-      Challenges.AddChallenge(this.form)
+      Projects.AddProject(this.form)
         .then(() => {
-          this.$router.push({ name: "Challenges" });
+          this.$router.push({ name: "AdminProjects" });
         })
         .catch(error => {
           if (error.response.status === 422) {
